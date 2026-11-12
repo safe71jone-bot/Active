@@ -1,0 +1,6 @@
+{
+  "appId": "com.dinlipi.app",
+  "appName": "দিনলিপি",
+  "webDir": "www",
+  "android": { "backgroundColor": "#0e1428" }
+}

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="bn"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0e1428">
+<title>দিনলিপি – রুটিন, অ্যালার্ম ও লাইফস্টাইল</title>
+<link rel="manifest" href='data:application/manifest+json,{"name":"দিনলিপি","short_name":"দিনলিপি","start_url":".","display":"standalone","background_color":"#0e1428","theme_color":"#0e1428"}'>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0e1428;--cd:#18213f;--c2:#222c52;--tx:#eef2ff;--mu:#98a2cc;--ac:#f5a742;--a2:#34d1b6;--rd:#ef6a6a;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:light){:root:not([data-theme=dark]){--bg:#eef2f0;--cd:#fff;--c2:#e2eae6;--tx:#17221f;--mu:#5c6c66;--ac:#c9780c;--a2:#12837a;color-scheme:light}}
+:root[data-theme=light]{--bg:#eef2f0;--cd:#fff;--c2:#e2eae6;--tx:#17221f;--mu:#5c6c66;--ac:#c9780c;--a2:#12837a;color-scheme:light}
+:root[data-theme=dark]{--bg:#0e1428;--cd:#18213f;--c2:#222c52;--tx:#eef2ff;--mu:#98a2cc;--ac:#f5a742;--a2:#34d1b6;color-scheme:dark}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0 auto;background:var(--bg);color:var(--tx);font-family:"Hind Siliguri","Noto Sans Bengali",system-ui,sans-serif;max-width:560px;padding:12px 14px 100px;line-height:1.45}
+h1{font-size:19px;margin:4px 0 0}h2{font-size:15px;margin:16px 0 6px}.mu{color:var(--mu);font-size:13px}
+.hero{background:linear-gradient(140deg,var(--ac),#e0568a 60%,#6d5dfc);color:#fff;border-radius:24px;padding:14px;margin:8px 0;display:flex;align-items:center;gap:6px}
+.hero svg{width:46%;flex:none}.hero .t{flex:1}.hero b{font-size:17px;display:block}.cd{font-size:30px;font-weight:700;font-variant-numeric:tabular-nums}
+.pg{height:6px;background:rgba(255,255,255,.3);border-radius:6px;overflow:hidden;margin-top:6px}.pg i{display:block;height:100%;background:#fff;transition:width .4s}
+.chips{display:flex;gap:8px}.chip{flex:1;background:var(--cd);border-radius:14px;padding:8px;text-align:center}.chip b{font-size:18px;display:block}.chip span{font-size:11px;color:var(--mu)}
+nav{position:fixed;left:0;right:0;bottom:0;max-width:560px;margin:auto;display:flex;background:var(--cd);padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px));border-radius:20px 20px 0 0;z-index:5;box-shadow:0 -4px 20px rgba(0,0,0,.25)}
+nav button{flex:1;border:0;background:none;color:var(--mu);font:inherit;font-size:11px;padding:3px 0}nav button span{display:block;font-size:20px}nav button.on{color:var(--ac);font-weight:700}
+.sec{display:none}.sec.on{display:block}
+.it{background:var(--cd);border-radius:16px;padding:11px;margin:8px 0;display:flex;gap:10px;align-items:center;border-inline-start:5px solid var(--c)}
+.it.now{box-shadow:0 0 0 2px var(--a2)}.it.dn{opacity:.55}.it.dn .ti{text-decoration:line-through}
+.it .b{flex:1;min-width:0}.ti{font-weight:600}.ic{font-size:24px}.pill{font-size:11px;background:var(--a2);color:#04231d;border-radius:8px;padding:1px 7px;margin-inline-start:6px}
+.ib{border:0;background:none;font-size:20px;padding:4px;color:var(--tx)}
+.btn{border:0;background:var(--ac);color:#1a1100;border-radius:12px;padding:10px 14px;font:inherit;font-weight:600}.btn.g{background:var(--c2);color:var(--tx)}.btn.r{background:var(--rd);color:#fff}a.btn{display:inline-block;text-decoration:none}
+.bx{background:var(--cd);border-radius:16px;padding:13px;margin:8px 0}.row{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:6px 0}
+input,textarea,select{width:100%;background:var(--c2);color:var(--tx);border:0;border-radius:10px;padding:10px;font:inherit;margin:4px 0}
+.fab{position:fixed;right:max(16px,calc(50% - 264px));bottom:calc(78px + env(safe-area-inset-bottom,0px));width:56px;height:56px;border-radius:50%;border:0;background:var(--ac);color:#1a1100;font-size:30px;z-index:6;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+.wt{display:flex;gap:6px;flex-wrap:wrap}.wt button{width:40px;height:40px;border-radius:12px;border:0;background:var(--c2);font-size:18px}.wt button.f{background:var(--a2)}
+.hs{display:flex;gap:6px;align-items:flex-end;height:80px}.hs div{flex:1;text-align:center;font-size:10px;color:var(--mu);display:flex;flex-direction:column;justify-content:flex-end;height:100%}.hs i{display:block;background:var(--a2);border-radius:5px 5px 0 0;min-height:3px}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;z-index:20;padding:16px}.ov>div{background:var(--cd);border-radius:22px;padding:20px;width:100%;max-width:420px;max-height:90vh;overflow:auto;text-align:center}
+.ov.l>div{text-align:start}.big{font-size:56px;animation:p 1s infinite}@keyframes p{50%{transform:scale(1.15)}}
+.br{width:120px;height:120px;border-radius:50%;margin:14px auto;background:var(--a2);animation:b 8s infinite ease-in-out}@keyframes b{50%{transform:scale(1.5)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<h1>🌿 দিনলিপি</h1><div class="mu" id="dt"></div>
+<div class="hero"><svg viewBox="0 0 200 200" id="dl" role="img" aria-label="২৪ ঘণ্টার ঘড়ি"></svg><div class="t"><span class="mu" style="color:#fff;opacity:.85" id="lb"></span><b id="nx">…</b><div class="cd" id="cd">--:--:--</div><div class="pg"><i id="pb"></i></div></div></div>
+<div class="chips"><div class="chip"><b id="s1">০</b><span>🔥 ধারা</span></div><div class="chip"><b id="s2">০/০</b><span>✅ সম্পন্ন</span></div><div class="chip"><b id="s3">০</b><span>⭐ পয়েন্ট</span></div></div>
+<div class="sec on" id="s"></div>
+<div class="sec" id="n"><input id="q" placeholder="🔍 নোট খুঁজুন"><div id="nl"></div></div>
+<div class="sec" id="t"></div>
+<div class="sec" id="m"></div>
+<div class="sec" id="g">
+<div class="bx"><b>🔔 নোটিফিকেশন ও অ্যালার্ম</b><div class="mu">শব্দ, ভাইব্রেশন ও নোটিফিকেশনের জন্য অনুমতি দিন।</div><div class="row"><span id="ps"></span><button class="btn" id="perm">অনুমতি দিন</button></div><div class="row"><button class="btn g" id="test">🔊 টেস্ট অ্যালার্ম</button><label class="mu"><input type="checkbox" id="wl" style="width:auto"> স্ক্রিন জাগিয়ে রাখুন</label></div>
+<div class="row"><span class="mu">আগাম সতর্কতা</span><select id="ld" style="width:auto"><option value="0">বন্ধ</option><option value="5">৫ মিনিট</option><option value="10">১০ মিনিট</option><option value="15">১৫ মিনিট</option></select></div>
+<div class="row"><label class="mu"><input type="checkbox" id="sd" style="width:auto"> শব্দ চালু</label></div></div>
+<div class="bx"><b>🎨 থিম</b><div class="row"><button class="btn g" data-th="">অটো</button><button class="btn g" data-th="dark">ডার্ক</button><button class="btn g" data-th="light">লাইট</button></div></div>
+<div class="bx"><b>💾 ব্যাকআপ</b><div class="row"><button class="btn g" id="ex">এক্সপোর্ট</button><button class="btn g" id="im">ইমপোর্ট</button><input type="file" id="fi" accept=".json" hidden></div></div>
+<div class="bx"><b>📱 ফোনে ইনস্টল</b><div class="mu">Chrome মেনু (⋮) → “Add to Home screen”। অ্যালার্ম নির্ভরযোগ্য রাখতে অ্যাপ খোলা রাখুন; জরুরি কাজে ফোনের Clock অ্যালার্মও দিন।</div></div>
+<div class="bx"><button class="btn g" id="rs">আজকের টিক রিসেট</button> <button class="btn g" id="df">রুটিন ডিফল্টে ফেরান</button></div></div>
+<button class="fab" id="fab" aria-label="যোগ করুন">+</button>
+<nav><button class="on" data-t="s"><span>📅</span>রুটিন</button><button data-t="n"><span>📝</span>নোট</button><button data-t="t"><span>📊</span>ট্র্যাকার</button><button data-t="m"><span>🧭</span>আরও</button><button data-t="g"><span>⚙️</span>সেটিং</button></nav>
+<div class="ov" id="rg"><div><div class="big" id="ri">⏰</div><h2 id="rt"></h2><p class="mu" id="rd"></p><div class="row"><button class="btn g" id="sz">😴 ৫ মিনিট পরে</button><button class="btn" id="sp">✅ শুরু করছি</button></div></div></div>
+<div class="ov l" id="md"><div><h3 id="mh"></h3><div id="mf"></div><div class="row"><button class="btn g" id="mc">বাতিল</button><button class="btn r" id="mx" hidden>মুছুন</button><button class="btn" id="ms">সংরক্ষণ</button></div></div></div>
+<div class="ov" id="rx"><div><h2>শ্বাস নিন… ছাড়ুন…</h2><div class="br"></div><div style="font-size:34px" id="rxt"></div><button class="btn g" id="rxs">বন্ধ করুন</button></div></div>
+<script>
+const CAP=window.Capacitor,NATIVE=!!(CAP&&CAP.isNativePlatform&&CAP.isNativePlatform());
+const LN=NATIVE&&CAP.Plugins.LocalNotifications,PF=NATIVE&&CAP.Plugins.Preferences;
+async function __hydrate(){if(!PF)return;try{const r=await PF.get({key:'dinlipi2'});if(r&&r.value)localStorage.setItem('dinlipi2',r.value)}catch(e){}}
+const __bn=s=>String(s).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);
+async function nativeSchedule(st){
+if(!LN)return;
+try{
+await LN.createChannel({id:'alarm',name:'রুটিন অ্যালার্ম',importance:5,vibration:true,visibility:1});
+const p=await LN.getPending();if(p.notifications.length)await LN.cancel({notifications:p.notifications.map(n=>({id:n.id}))});
+const list=[],M=t=>{const[a,b]=t.split(':');return +a*60+ +b};
+st.items.forEach(x=>{if(!x.al)return;const s=M(x.t);
+list.push({id:x.id,title:'⏰ '+x.i+' '+x.n,body:x.d||'',channelId:'alarm',schedule:{on:{hour:Math.floor(s/60),minute:s%60},allowWhileIdle:true}});
+if(st.lead>0){const q=(s-st.lead+1440)%1440;list.push({id:x.id+100000,title:x.i+' '+x.n,body:__bn(st.lead)+' মিনিট পরে শুরু',channelId:'alarm',schedule:{on:{hour:Math.floor(q/60),minute:q%60},allowWhileIdle:true}})}});
+st.notes.forEach(x=>{if(x.r&&!x.rf){const d=new Date(x.r);if(d>Date.now())list.push({id:500000+(x.id%1000000),title:'📝 '+(x.t||'নোট'),body:x.b||'',channelId:'alarm',schedule:{at:d,allowWhileIdle:true}})}});
+if(list.length)await LN.schedule({notifications:list});
+}catch(e){console.log('sched',e)}}
+__hydrate().then(()=>{
+const $=i=>document.getElementById(i),K='dinlipi2';
+const bn=s=>String(s).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]),mn=t=>{const[a,b]=t.split(':');return +a*60+ +b};
+const hm=d=>String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+const dk=(d=new Date())=>d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+const esc=s=>String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const DS=[
+{id:1,k:'t',t:'06:00',e:'06:30',i:'🚶',n:'হাঁটা ও জগিং',d:'ফজরের পর ৩০ মিনিট হাঁটা, জগিং ও ওয়ার্ম আপ',al:1},
+{id:2,k:'t',t:'06:30',e:'08:00',i:'💪',n:'শারীরিক কসরত',d:'পুশ আপ, স্কোয়াট ও ফ্রি-হ্যান্ড এক্সারসাইজ',al:1},
+{id:3,k:'m',t:'07:45',e:'08:00',i:'🍳',n:'সকালের খাবার',d:'কালো জিরা + মধু + কাঁচা রসুন + ডিম + দুধ',al:1},
+{id:4,k:'t',t:'08:00',e:'10:00',i:'📚',n:'পড়াশোনা ও স্কিল',d:'একটানা মনোযোগে পড়াশোনা ও ট্রেনিং',al:1},
+{id:5,k:'t',t:'11:00',e:'14:00',i:'💼',n:'প্রধান কর্ম / প্রফেশনাল কাজ',d:'গুরুত্বপূর্ণ মূল কাজ সম্পাদন',al:1},
+{id:6,k:'m',t:'14:00',e:'14:30',i:'🍛',n:'দুপুরের খাবার',d:'ভাত/মাছ + ডাল + ডিম + সালাদ + সবজি',al:1},
+{id:7,k:'t',t:'15:00',e:'17:00',i:'🏢',n:'অফিস কাজ / শারীরিক চর্চা',d:'৩টা থেকে ৫টার নির্ধারিত কাজ',al:1},
+{id:8,k:'m',t:'16:45',e:'17:00',i:'🍌',n:'বিকালের নাস্তা',d:'কলা + খেজুর + কিশমিশ + বাদাম',al:1},
+{id:9,k:'t',t:'17:00',e:'19:00',i:'🥋',n:'বিনোদন ও ফিটনেস',d:'মার্শাল আর্ট + জগিং + বিনোদনমূলক বিরতি',al:1},
+{id:10,k:'m',t:'19:30',e:'20:00',i:'🥛',n:'রাতের খাবার',d:'দুধ + আপেল সাইডার ভিনেগার / হালকা খাবার',al:1},
+{id:11,k:'t',t:'20:00',e:'22:00',i:'🌙',n:'আমল ও পড়াশোনা',d:'মূল বিষয়ের পর্যালোচনা ও রাতের কাজ',al:1},
+{id:12,k:'t',t:'22:30',e:'23:00',i:'🧘',n:'মাইন্ডফুলনেস ও মেডিটেশন',d:'মেডিটেশন + স্কিন কেয়ার + মানসিক প্রশান্তি',al:1}];
+const MK=[['PeoplePerHour','আওয়ারলি প্রজেক্ট বিডিং ও স্কিল ম্যাচিং','https://www.peopleperhour.com'],['Fiverr','গিগ অপ্টিমাইজেশন ও সার্ভিস লিস্ট','https://www.fiverr.com'],['Workana','রিমোট ক্লায়েন্ট প্রপোজাল সাবমিশন','https://www.workana.com'],['Guru','প্রজেক্টভিত্তিক বিডিং ও কাজ সম্পন্ন','https://www.guru.com']];
+let st={items:JSON.parse(JSON.stringify(DS)),done:{},fired:{},sn:[],notes:[],water:{},mood:{},bids:{},lead:5,sound:1,th:'',nid:100,day:dk()};
+try{const r=localStorage.getItem(K);if(r)st=Object.assign(st,JSON.parse(r))}catch(e){}
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(st))}catch(e){}if(PF)PF.set({key:K,value:JSON.stringify(st)});clearTimeout(save.t);save.t=setTimeout(()=>nativeSchedule(st),800)};
+const dn=()=>st.done[dk()]||(st.done[dk()]={});
+function roll(){if(st.day!==dk()){st.day=dk();st.fired={};st.sn=[];save()}}
+/* ঘড়ি ডায়াল */
+const pt=(m,r)=>{const a=m/1440*2*Math.PI-Math.PI/2;return[100+r*Math.cos(a),100+r*Math.sin(a)]};
+function arc(a,b,r){if(b<=a)b=a+10;const[x1,y1]=pt(a,r),[x2,y2]=pt(Math.min(b,1439.9),r);return`M${x1.toFixed(1)} ${y1.toFixed(1)}A${r} ${r} 0 ${b-a>720?1:0} 1 ${x2.toFixed(1)} ${y2.toFixed(1)}`}
+function dial(nm){let s='<circle cx="100" cy="100" r="84" fill="rgba(255,255,255,.12)"/><circle cx="100" cy="100" r="66" fill="rgba(0,0,0,.18)"/>';
+[0,6,12,18].forEach(h=>{const[x,y]=pt(h*60,95);s+=`<text x="${x}" y="${y+4}" text-anchor="middle" font-size="10" fill="#fff" opacity=".8">${bn(h)}</text>`});
+st.items.forEach(x=>{const r=x.k==='m'?72:84;s+=`<path d="${arc(mn(x.t),mn(x.e),r)}" fill="none" stroke="${dn()[x.id]?'#fff':x.k==='m'?'#34d1b6':'#fff'}" stroke-opacity="${dn()[x.id]?1:.55}" stroke-width="${x.k==='m'?7:11}" stroke-linecap="round"/>`});
+const[nx,ny]=pt(nm,84);s+=`<line x1="100" y1="100" x2="${nx}" y2="${ny}" stroke="#fff" stroke-width="3" stroke-linecap="round"/><circle cx="100" cy="100" r="5" fill="#fff"/>`;$('dl').innerHTML=s}
+/* অ্যালার্ম */
+let ac,tm;
+function beep(){if(!st.sound)return;try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();clearInterval(tm);let n=0;tm=setInterval(()=>{const o=ac.createOscillator(),g=ac.createGain();o.frequency.value=[660,880,1100][n++%3];g.gain.value=.3;o.connect(g);g.connect(ac.destination);o.start();o.stop(ac.currentTime+.22)},450)}catch(e){}}
+let cs;
+function ring(x){cs=x;$('ri').textContent=x.i;$('rt').textContent=x.n;$('rd').textContent=(x.t?bn(x.t)+' · ':'')+(x.d||'');$('rg').style.display='flex';beep();
+try{navigator.vibrate&&navigator.vibrate([400,200,400,200,400])}catch(e){}
+try{if('Notification' in window&&Notification.permission==='granted')new Notification('⏰ '+x.n,{body:x.d||''})}catch(e){}}
+function stop(){$('rg').style.display='none';clearInterval(tm);try{navigator.vibrate&&navigator.vibrate(0)}catch(e){}}
+$('sp').onclick=stop;$('sz').onclick=()=>{st.sn.push({t:hm(new Date(Date.now()+3e5)),i:cs.i,n:cs.n,d:cs.d});save();stop()};
+$('test').onclick=()=>ring({i:'⏰',n:'টেস্ট অ্যালার্ম',d:'শব্দ ও ভাইব্রেশন ঠিক আছে'});
+function tick(){roll();const d=new Date(),nm=d.getHours()*60+d.getMinutes(),k=dk();
+st.items.forEach(x=>{if(!x.al)return;const s=mn(x.t),p=k+x.id+'p',f=k+x.id+'s';
+if(st.lead>0&&nm>=s-st.lead&&nm<s&&!st.fired[p]){st.fired[p]=1;save();try{if(Notification.permission==='granted')new Notification(x.i+' '+x.n,{body:bn(s-nm)+' মিনিট পরে শুরু'})}catch(e){}}
+if(nm>=s&&nm-s<=2&&!st.fired[f]){st.fired[f]=1;save();ring(x)}});
+st.notes.forEach(x=>{if(x.r&&!x.rf&&x.r<=k.split('-').map((v,i)=>i?v.padStart(2,'0'):v).join('-')+'T'+hm(d)&&x.r>=dk(d).split('-').map((v,i)=>i?v.padStart(2,'0'):v).join('-')+'T00:00'){x.rf=1;save();ring({i:'📝',n:x.t||'নোট',d:x.b})}});
+st.sn=st.sn.filter(x=>{const s=mn(x.t);if(nm>=s&&nm-s<=2){ring(x);return false}return s>nm||nm-s>2&&false});
+const nx=nextI(nm);if(nx){const sec=mn(nx.t)*60-(nm*60+d.getSeconds()),h=Math.floor(sec/3600),m=Math.floor(sec%3600/60);$('cd').textContent=bn(String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(sec%60).padStart(2,'0'))}
+if(tick.l!==nm){tick.l=nm;render()}}
+const nextI=nm=>st.items.filter(x=>mn(x.t)>nm).sort((a,b)=>mn(a.t)-mn(b.t))[0];
+/* রেন্ডার */
+function render(){const d=new Date(),nm=d.getHours()*60+d.getMinutes(),T=st.items.filter(x=>x.k==='t'),dd=dn();
+$('dt').textContent=d.toLocaleDateString('bn-BD',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+const cur=st.items.find(x=>nm>=mn(x.t)&&nm<mn(x.e)),nx=nextI(nm),c=st.items.filter(x=>dd[x.id]).length,p=st.items.length?Math.round(c/st.items.length*100):0;
+$('lb').textContent=cur?'এখন চলছে: '+cur.i+' '+cur.n:'পরবর্তী কাজ';$('nx').textContent=nx?nx.i+' '+nx.n+' · '+bn(nx.t):'আজকের সব কাজ শেষ 🎉';if(!nx)$('cd').textContent='✨';
+$('pb').style.width=p+'%';$('s1').textContent=bn(streak());$('s2').textContent=bn(c)+'/'+bn(st.items.length);
+$('s3').textContent=bn(Object.values(st.done).reduce((a,o)=>a+Object.keys(o).length,0)*10);dial(nm);
+$('s').innerHTML=st.items.slice().sort((a,b)=>mn(a.t)-mn(b.t)).map(x=>{const now=nm>=mn(x.t)&&nm<mn(x.e);
+return`<div class="it ${now?'now':''} ${dd[x.id]?'dn':''}" style="--c:${x.k==='m'?'var(--a2)':'var(--ac)'}"><div class="ic">${x.i}</div><div class="b" data-ed="${x.id}"><div class="mu">${bn(x.t)} – ${bn(x.e)}${now?'<span class="pill">এখন</span>':''}</div><div class="ti">${esc(x.n)}</div><div class="mu">${esc(x.d)}</div></div><div><button class="ib" data-al="${x.id}">${x.al?'🔔':'🔕'}</button><button class="ib" data-dn="${x.id}">${dd[x.id]?'✅':'⬜'}</button></div></div>`}).join('');
+const q=$('q').value.trim();$('nl').innerHTML=st.notes.filter(x=>!q||(x.t+x.b).includes(q)).sort((a,b)=>(b.p||0)-(a.p||0)).map(x=>`<div class="bx"><div class="row"><b data-en="${x.id}">${x.p?'📌 ':''}${esc(x.t)||'শিরোনামহীন'}</b><button class="ib" data-pn="${x.id}">📌</button></div><div class="mu" style="white-space:pre-wrap" data-en="${x.id}">${esc(x.b)}</div>${x.r?'<div class="mu">⏰ '+bn(x.r.replace('T',' '))+'</div>':''}</div>`).join('')||'<div class="mu" style="text-align:center;margin:20px">কোনো নোট নেই — + চাপুন</div>';
+const w=st.water[dk()]||0,b=st.bids[dk()]||0,md=st.mood[dk()]||'';let hs='';
+for(let j=6;j>=0;j--){const x=new Date();x.setDate(x.getDate()-j);const n=Object.keys(st.done[dk(x)]||{}).length;hs+=`<div><i style="height:${Math.min(100,n/Math.max(1,st.items.length)*100)}%"></i>${['রবি','সোম','মঙ্গল','বুধ','বৃহ','শুক্র','শনি'][x.getDay()]}</div>`}
+$('t').innerHTML=`<div class="bx"><b>💧 পানি: ${bn(w)}/৮ গ্লাস</b><div class="wt">${[1,2,3,4,5,6,7,8].map(i=>`<button class="${i<=w?'f':''}" data-w="${i}">💧</button>`).join('')}</div></div>
+<div class="bx"><b>😊 আজকের মুড</b><div class="wt">${['😞','😕','😐','🙂','😄'].map(e=>`<button class="${md===e?'f':''}" data-mo="${e}">${e}</button>`).join('')}</div></div>
+<div class="bx"><b>💻 বিড লক্ষ্য: ${bn(b)}/৫</b><div class="row"><button class="btn g" data-bd="-1">−</button><div class="pg" style="flex:1;background:var(--c2)"><i style="width:${Math.min(100,b*20)}%;background:var(--a2)"></i></div><button class="btn" data-bd="1">+</button></div></div>
+<div class="bx"><b>📈 গত ৭ দিন</b><div class="hs">${hs}</div></div>`;
+$('m').innerHTML=`<button class="btn" id="rl" style="width:100%">🌬️ রিলাক্স বিরতি (৩ মি ২০ সে)</button><h2>💼 ফ্রিল্যান্সিং মার্কেটপ্লেস</h2>`+MK.map(x=>`<div class="bx"><b>${x[0]}</b><div class="row"><span class="mu">${x[1]}</span><a class="btn" href="${x[2]}" target="_blank" rel="noopener">খুলুন</a></div></div>`).join('')+'<div class="bx mu">লক্ষ্য: নিয়মিত বিডিং, গিগ র‍্যাঙ্কিং পর্যবেক্ষণ ও ক্লায়েন্ট কমিউনিকেশন।</div>';
+$('rl').onclick=relax}
+function streak(){let n=0;const d=new Date();for(let i=0;i<365;i++){const c=Object.keys(st.done[dk(d)]||{}).length;if(c>=st.items.length*.6&&c>0)n++;else if(i>0)break;d.setDate(d.getDate()-1)}return n}
+let rt;function relax(){let s=200;$('rx').style.display='flex';const u=()=>$('rxt').textContent=bn(Math.floor(s/60)+':'+String(s%60).padStart(2,'0'));u();clearInterval(rt);rt=setInterval(()=>{s--;u();if(s<=0){clearInterval(rt);$('rx').style.display='none'}},1000)}
+$('rxs').onclick=()=>{clearInterval(rt);$('rx').style.display='none'};
+/* ফর্ম */
+let cb,dl;
+function ask(h,F,fn,del){$('mh').textContent=h;$('mf').innerHTML=F.map(f=>f.k==='b'?`<textarea rows="4" id="f_b" placeholder="${f.l}">${esc(f.v)}</textarea>`:`<label class="mu">${f.l}</label><input id="f_${f.k}" type="${f.ty||'text'}" value="${esc(f.v)}">`).join('');
+$('mx').hidden=!del;dl=del;cb=()=>{const o={};F.forEach(f=>o[f.k]=$('f_'+f.k).value.trim());fn(o);$('md').style.display='none';save();render()};$('md').style.display='flex'}
+$('mc').onclick=()=>$('md').style.display='none';$('ms').onclick=()=>cb&&cb();$('mx').onclick=()=>{if(dl&&confirm('মুছে ফেলবেন?')){dl();$('md').style.display='none';save();render()}};
+function taskForm(x){const n=!x;x=x||{t:'09:00',e:'10:00',i:'⭐',n:'',d:'',al:1,k:'t'};ask(n?'নতুন কাজ':'কাজ সম্পাদনা',[{k:'i',l:'আইকন (ইমোজি)',v:x.i},{k:'n',l:'নাম',v:x.n},{k:'t',l:'শুরু',ty:'time',v:x.t},{k:'e',l:'শেষ',ty:'time',v:x.e},{k:'d',l:'বিবরণ',v:x.d}],o=>{if(!o.n||!o.t||!o.e)return;Object.assign(x,o);if(n){x.id=++st.nid;st.items.push(x)}},n?null:()=>{st.items=st.items.filter(y=>y!==x)})}
+function noteForm(x){const n=!x;x=x||{t:'',b:'',r:''};ask(n?'নতুন নোট':'নোট সম্পাদনা',[{k:'t',l:'শিরোনাম',v:x.t},{k:'b',l:'এখানে লিখুন…',v:x.b},{k:'r',l:'রিমাইন্ডার (ঐচ্ছিক)',ty:'datetime-local',v:x.r}],o=>{if(!o.t&&!o.b)return;if(o.r!==x.r)x.rf=0;Object.assign(x,o);if(n){x.id=++st.nid;st.notes.push(x)}},n?null:()=>{st.notes=st.notes.filter(y=>y!==x)})}
+let tab='s';
+document.addEventListener('click',e=>{const t=e.target.closest('[data-t],[data-al],[data-dn],[data-ed],[data-en],[data-pn],[data-w],[data-mo],[data-bd],[data-th]');if(!t)return;const D=t.dataset,f=(a,i)=>a.find(x=>x.id==i);
+if(D.t){tab=D.t;document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b===t));document.querySelectorAll('.sec').forEach(s=>s.classList.toggle('on',s.id===tab));$('fab').style.display=tab==='s'||tab==='n'?'block':'none';return}
+if(D.al){const x=f(st.items,D.al);x.al=x.al?0:1}
+if(D.dn)dn()[D.dn]?delete dn()[D.dn]:dn()[D.dn]=1;
+if(D.ed)return taskForm(f(st.items,D.ed));if(D.en)return noteForm(f(st.notes,D.en));
+if(D.pn){const x=f(st.notes,D.pn);x.p=x.p?0:1}
+if(D.w){const k=dk();st.water[k]=st.water[k]==D.w?D.w-1:+D.w}
+if(D.mo){const k=dk();st.mood[k]=st.mood[k]===D.mo?'':D.mo}
+if(D.bd!==undefined){const k=dk();st.bids[k]=Math.max(0,(st.bids[k]||0)+ +D.bd)}
+if(D.th!==undefined){st.th=D.th;if(D.th)document.documentElement.dataset.theme=D.th;else delete document.documentElement.dataset.theme}
+save();render()});
+$('fab').onclick=()=>tab==='n'?noteForm():taskForm();$('q').oninput=render;
+function ps(){if(LN){LN.checkPermissions().then(r=>{$('ps').textContent='স্ট্যাটাস: '+({granted:'চালু ✅',denied:'বন্ধ ❌'}[r.display]||'অনুমতি বাকি')});return}let s='সমর্থিত নয়';try{if('Notification' in window)s={granted:'চালু ✅',denied:'বন্ধ ❌',default:'অনুমতি বাকি'}[Notification.permission]}catch(e){}$('ps').textContent='স্ট্যাটাস: '+s}
+$('perm').onclick=()=>{if(LN){LN.requestPermissions().then(async()=>{try{const e=await LN.checkExactNotificationSetting();if(e.exact_alarm!=='granted')await LN.changeExactNotificationSetting()}catch(x){}ps();nativeSchedule(st)});return}try{Notification.requestPermission().then(ps)}catch(e){ps()}};
+let wk;$('wl').onchange=async e=>{try{if(e.target.checked)wk=await navigator.wakeLock.request('screen');else wk&&wk.release()}catch(x){e.target.checked=false;alert('এই ডিভাইসে সমর্থিত নয়')}};
+$('ld').value=st.lead;$('ld').onchange=e=>{st.lead=+e.target.value;save()};$('sd').checked=!!st.sound;$('sd').onchange=e=>{st.sound=e.target.checked?1:0;save()};
+$('rs').onclick=()=>{st.done[dk()]={};st.fired={};save();render()};
+$('df').onclick=()=>{if(confirm('সব কাজ ডিফল্ট রুটিনে ফিরবে। নোট থাকবে।')){st.items=JSON.parse(JSON.stringify(DS));save();render()}};
+$('ex').onclick=()=>{if(NATIVE){navigator.clipboard.writeText(JSON.stringify(st)).then(()=>alert('ব্যাকআপ কপি হয়েছে। কোনো নোট/মেসেজে পেস্ট করে রাখুন।'),()=>prompt('ব্যাকআপ কপি করুন',JSON.stringify(st)));return}const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(st)],{type:'application/json'}));a.download='dinlipi-backup-'+dk()+'.json';a.click()};
+$('im').onclick=()=>{if(NATIVE){const v=prompt('ব্যাকআপ টেক্সট পেস্ট করুন');if(v){try{st=Object.assign(st,JSON.parse(v));save();render();alert('ইমপোর্ট সম্পন্ন')}catch(x){alert('সঠিক নয়')}}return}$('fi').click()};
+$('fi').onchange=e=>{const r=new FileReader();r.onload=()=>{try{st=Object.assign(st,JSON.parse(r.result));save();render();alert('ইমপোর্ট সম্পন্ন')}catch(x){alert('ফাইলটি সঠিক নয়')}};e.target.files[0]&&r.readAsText(e.target.files[0])};
+document.addEventListener('visibilitychange',()=>!document.hidden&&tick());
+if(st.th)document.documentElement.dataset.theme=st.th;
+ps();tick();setInterval(tick,1000);
+if(LN){LN.checkPermissions().then(r=>{if(r.display!=='granted')$('perm').click()});nativeSchedule(st)}
+});
+</script></body></html>
